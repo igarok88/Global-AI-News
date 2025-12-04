@@ -83,7 +83,7 @@ if (!empty($queryTopic)) {
         exit();
     }
 
-    logger("✅ Найдено ссылок: $foundCount. Обрабатываем первые $selectedLimit...", 'info');
+    logger("✅ $foundCount links found. Processing the first $selectedLimit...", 'info');
 
     // 3. PYTHON (DOWNLOADING)
     $fullContext = "";
