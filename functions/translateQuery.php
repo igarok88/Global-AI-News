@@ -65,7 +65,7 @@ function translateQuery($text, $targetLangCode, $countryName, $apiKey)
     ];
 
     // Initialize cURL session targeting the Gemini 2.0 Flash model endpoint
-    $ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey);
+    $ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" . $apiKey);
     // Set option to return the response as a string instead of printing it
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     // Set HTTP method to POST

@@ -141,13 +141,12 @@ if (!empty($queryTopic)) {
         3.  **Start IMMEDIATELY** with the main headline (Format: # Headline).
         4.  **Language:** The ENTIRE report must be in $targetLangName.
         5.  **Localize Headers:** You MUST translate the section headers ("Key Takeaways", "In-Depth Analysis") into $targetLangName.
+      
 
         Report Structure:
         # 🌍 [Main Analytical Headline of the Event in $targetLangName]
-
         ## ⚡ [Translate "Key Takeaways" to $targetLangName]
         [Bullet points of the most important facts]
-
         ## 🔍 [Translate "In-Depth Analysis" to $targetLangName]
         [Detailed summary of the situation based on the articles]
 
@@ -174,7 +173,7 @@ if (!empty($queryTopic)) {
         } else {
 
             // Initialize cURL session
-            $ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $GEMINI_API_KEY);
+            $ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" . $GEMINI_API_KEY);
             // Return response as string
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             // Set method to POST
@@ -207,6 +206,10 @@ if (!empty($queryTopic)) {
                 $md = preg_replace('/^# (.*)$/m', '<h2>$1</h2>', $md);
                 // Convert H2
                 $md = preg_replace('/^## (.*)$/m', '<h3>$1</h3>', $md);
+
+                //4. FIXING INDENTS: Remove line breaks IMMEDIATELY AFTER headings
+                $md = preg_replace('/(<\/h[23]>)\s+/s', '$1', $md);
+
                 // Convert newlines to breaks
                 $resultHtml = nl2br($md);
 
