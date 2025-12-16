@@ -17,6 +17,10 @@
 -   **Real-time Logging:** Displays the backend process (searching, downloading, analyzing) in a real-time console via Server-Sent Events (SSE).
 -   **Zero Database:** Runs entirely on-the-fly, requiring no database setup.
 
+## 📸 Screenshots
+![Screenshot_16](https://github.com/user-attachments/assets/3ab1abdd-6596-4168-a89a-96d1a3fda07b)
+
+
 ## 📂 Project Structure
 
 ```text
@@ -137,7 +141,25 @@ The `news_fetcher.py` script is designed to be robust:
 -   **AI Engine:** Google Gemini 2.0 flash via REST API (cURL).
     
 -   **Python Libs:** `playwright`, `trafilatura`, `googlenewsdecoder`, `requests`.
-    
+
+### ⚠️ Note on Gemini Model Versions
+
+Google frequently updates its AI models, deprecating old versions and introducing new ones with different rate limits. 
+* **Example:** This project initially used `gemini-2.0-flash`, but currently runs on **`gemini-2.5-flash-lite`**.
+* **Check Availability:** Always check [Google AI Studio](https://aistudio.google.com/) for the current list of available models and their free tier quotas.
+
+**How to change the model:**
+If you need to switch to a newer or different model, you must update the API endpoint URL in the following two files:
+
+1.  `process.php`
+2.  `functions/translateQuery.php` (or where the translation function is located)
+
+Find the `curl_init` line and replace the model name (e.g., to `gemini-2.5-flash`):
+
+```php
+// Example: Switching to gemini-2.5-flash-lite
+$ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=" . $GEMINI_API_KEY);
+```
 
 ## 📄 License
 
